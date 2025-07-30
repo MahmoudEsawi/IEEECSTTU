@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - IEEE Computer Society Student Chapter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.css">
+    <style>
+        /* CSS Variables for Light Mode - Using colors from Bright Color Palette */
+        :root {
+            --primary-color: #FFA300; /* Bright orange from palette */
+            --primary-light: #FFCC80; /* Lighter version of primary */
+            --primary-dark: #FF8C00; /* Darker version of primary */
+            --secondary-color: #75787B; /* Neutral gray from palette */
+            --accent-color: #00B0F0; /* Bright blue from palette */
+            --accent-light: #90CAF9; /* Lighter version of accent */
+            --accent-dark: #0091EA; /* Darker version of accent */
+            --dark-color: #002855; /* Dark blue from palette */
+            --light-color: #f8f9fa;
+            --text-color: #333333;
+            --text-light: #6c757d;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #dee2e6;
+            --footer-bg: #002855;
+            --footer-text: #ffffff;
+            --gradient-start: #00B0F0;
+            --gradient-end: #002855;
+            --accent-gradient: linear-gradient(135deg, #00B0F0, #002855);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hero-gradient: linear-gradient(135deg, #00B0F0 0%, #002855 100%);
+        }
+        
+        /* Dark Mode Variables with Enhanced Colors - Using colors from Dark Color Palette */
+        body.dark-mode {
+            --primary-color: #FFA300; /* Keep the orange as accent */
+            --primary-light: #FFCC80;
+            --primary-dark: #FF8C00;
+            --secondary-color: #B0BEC5; /* Lighter gray for dark mode */
+            --accent-color: #00B0F0; /* Keep the blue as accent */
+            --accent-light: #90CAF9;
+            --accent-dark: #0091EA;
+            --dark-color: #ECEFF1; /* Light text for dark mode */
+            --light-color: #37474F; /* Darker background for elements */
+            --text-color: #ECEFF1;
+            --text-light: #B0BEC5;
+            --bg-color: #121212; /* Dark background */
+            --card-bg: #1E1E1E; /* Slightly lighter than background */
+            --navbar-bg: rgba(30, 30, 30, 0.95);
+            --border-color: #37474F;
+            --footer-bg: #0D0D0D;
+            --footer-text: #ECEFF1;
+            --gradient-start: #00B0F0;
+            --gradient-end: #37474F;
+            --accent-gradient: linear-gradient(135deg, #00B0F0, #37474F);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --hero-gradient: linear-gradient(135deg, #00B0F0 0%, #37474F 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            transition: background-color 0.4s, color 0.4s;
+        }
+        
+        /* Enhanced Glass Morphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .glass {
+            background: rgba(0, 40, 85, 0.2);
+            border: 1px solid rgba(117, 120, 123, 0.3);
+        }
+        
+        /* Enhanced Navbar */
+        .navbar {
+            background: var(--navbar-bg);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 163, 0, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+            border-radius: 20px;
+        }
+        
+        /* Enhanced Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .dark-mode-toggle {
+            background: var(--primary-color);
+        }
+        
+        /* Social Media Icons in Navbar */
+        .navbar-social {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .navbar-social a {
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Enhanced Blog Hero Section */
+        .blog-hero {
+            background: var(--hero-gradient);
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/seed/blog-pattern/1920/1080.jpg');
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .blog-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .blog-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Enhanced Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            display: inline-block;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+        
+        /* Enhanced Blog Section */
+        .blog-section {
+            padding: 80px 0;
+            position: relative;
+            background-color: var(--bg-color);
+            transition: background-color 0.4s;
+        }
+        
+        /* Enhanced Blog Cards */
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .blog-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+        
+        .blog-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .blog-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        .blog-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-category:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+        
+        .blog-card:hover .blog-title {
+            color: var(--primary-color);
+        }
+        
+        .blog-excerpt {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .blog-read-more {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        
+        /* Blog Filter Categories */
+        .blog-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .blog-category-filter {
+            padding: 10px 20px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-category-filter:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .blog-category-filter.active {
+            background: var(--primary-color);
+        }
+        
+        /* Enhanced Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Enhanced Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 50px 0 20px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s, color 0.4s;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+        }
+        
+        .footer-logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            max-width: 150px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-heading {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-menu a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--footer-text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social-link:hover {
+            background: var(--primary-color);
+            color: var(--footer-bg);
+            transform: translateY(-3px);
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Wave Animation */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffa300" fill-opacity="0.2" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        
+        /* Blog Pagination */
+        .blog-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+        
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .page-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .page-link.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Blog Stats */
+        .blog-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+            display: none;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .blog-category-filter {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+            
+            .navbar-social {
+                display: none;
+            }
+            
+            .navbar-nav {
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .navbar-nav .nav-item {
+                margin: 5px 0;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Left side: Logo and dark mode toggle -->
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand" href="index.html">
+                    <img src="ieee-cs-logos-web/IEEE-CS_LogoTM-orange.png" alt="IEEE CS Logo" style="max-width: 150px;">
+                </a>
+                
+            </div>
+            
+            <!-- Middle: Navigation links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#goals">Goals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#vision">Vision</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#achievements">Achievements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#connect">Connect Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faqs.html">FAQs</a>
+                    </li>
+                </ul>
+            </div>
+            <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode" style="margin-right: 15px; ;">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Right side: Social media links -->
+            <div class="navbar-social">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            
+            <!-- Mobile menu toggle button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Blog Hero Section with Parallax -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Our Blog</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">Stay updated with the latest news, events, and insights from the IEEE Computer Society Student Chapter</p>
+        </div>
+        <div class="wave"></div>
+    </section>
+    
+    <!-- Blog Section with Modern Design -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Latest Posts</h2>
+            </div>
+            
+            <!-- Blog Stats -->
+            <div class="blog-stats">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="counter-value" data-target="24">24</div>
+                    <div class="stat-label">Total Posts</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter-value" data-target="8">8</div>
+                    <div class="stat-label">Authors</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="counter-value" data-target="1500">211</div>
+                    <div class="stat-label">Total Views</div>
+                </div>
+            </div>
+            
+            <!-- Blog Categories -->
+            <div class="blog-categories">
+                <div class="blog-category-filter active" data-category="all">All Posts</div>
+                <div class="blog-category-filter" data-category="events">Events</div>
+                <div class="blog-category-filter" data-category="technology">Technology</div>
+                <div class="blog-category-filter" data-category="announcements">Announcements</div>
+                <div class="blog-category-filter" data-category="tutorials">Tutorials</div>
+            </div>
+            
+            <!-- Blog Posts Grid -->
+            <div class="row" id="blogPostsContainer">
+                <!-- Blog Post 1 -->
+                <div class="col-lg-4 col-md-6 mb-4 blog-post-item" data-category="technology">
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://picsum.photos/seed/blog1/400/200.jpg" alt="Blog Post" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>May 15, 2024</span>
+                                </div>
+                                <div class="blog-category">Technology</div>
+                            </div>
+                            <h3 class="blog-title">The Future of Quantum Computing</h3>
+                            <p class="blog-excerpt">Exploring the potential of quantum computing and its impact on various industries. Learn about the latest developments and what they mean for the future of technology.</p>
+                            <div class="blog-author">
+                                <i class="far fa-user"></i>
+                                <span>Sarah Johnson</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-glow blog-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 2 -->
+                <div class="col-lg-4 col-md-6 mb-4 blog-post-item" data-category="events">
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://picsum.photos/seed/blog2/400/200.jpg" alt="Blog Post" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>April 28, 2024</span>
+                                </div>
+                                <div class="blog-category">Events</div>
+                            </div>
+                            <h3 class="blog-title">AI Ethics in Modern Society</h3>
+                            <p class="blog-excerpt">Discussing the ethical implications of artificial intelligence and machine learning. A deep dive into the challenges and opportunities presented by AI technologies.</p>
+                            <div class="blog-author">
+                                <i class="far fa-user"></i>
+                                <span>Michael Chen</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-glow blog-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 3 -->
+                <div class="col-lg-4 col-md-6 mb-4 blog-post-item" data-category="tutorials">
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://picsum.photos/seed/blog3/400/200.jpg" alt="Blog Post" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>April 10, 2024</span>
+                                </div>
+                                <div class="blog-category">Tutorials</div>
+                            </div>
+                            <h3 class="blog-title">Cybersecurity Best Practices</h3>
+                            <p class="blog-excerpt">Essential cybersecurity practices every developer should know and implement. Protect your applications and data with these proven security measures.</p>
+                            <div class="blog-author">
+                                <i class="far fa-user"></i>
+                                <span>Emily Rodriguez</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-glow blog-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 4 -->
+                <div class="col-lg-4 col-md-6 mb-4 blog-post-item" data-category="announcements">
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://picsum.photos/seed/blog4/400/200.jpg" alt="Blog Post" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>March 25, 2024</span>
+                                </div>
+                                <div class="blog-category">Announcements</div>
+                            </div>
+                            <h3 class="blog-title">New Partnership with TechCorp</h3>
+                            <p class="blog-excerpt">We're excited to announce our new partnership with TechCorp, bringing exclusive internship opportunities and mentorship programs to our members.</p>
+                            <div class="blog-author">
+                                <i class="far fa-user"></i>
+                                <span>David Kim</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-glow blog-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 5 -->
+                <div class="col-lg-4 col-md-6 mb-4 blog-post-item" data-category="events">
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://picsum.photos/seed/blog5/400/200.jpg" alt="Blog Post" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>March 12, 2024</span>
+                                </div>
+                                <div class="blog-category">Events</div>
+                            </div>
+                            <h3 class="blog-title">Hackathon 2024: Winners Announced</h3>
+                            <p class="blog-excerpt">Celebrating the innovative solutions developed during our annual hackathon. Meet the winners and learn about their groundbreaking projects.</p>
+                            <div class="blog-author">
+                                <i class="far fa-user"></i>
+                                <span>Jessica Taylor</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-glow blog-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post 6 -->
+                <div class="col-lg-4 col-md-6 mb-4 blog-post-item" data-category="technology">
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="https://picsum.photos/seed/blog6/400/200.jpg" alt="Blog Post" class="blog-image">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <div class="blog-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>February 28, 2024</span>
+                                </div>
+                                <div class="blog-category">Technology</div>
+                            </div>
+                            <h3 class="blog-title">Blockchain Beyond Cryptocurrency</h3>
+                            <p class="blog-excerpt">Exploring the diverse applications of blockchain technology beyond digital currencies. Discover how blockchain is revolutionizing various industries.</p>
+                            <div class="blog-author">
+                                <i class="far fa-user"></i>
+                                <span>Alex Thompson</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-glow blog-read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>No posts found</h3>
+                <p>Try adjusting your search or filter to find what you're looking for.</p>
+            </div>
+            
+            <!-- Blog Pagination -->
+            <div class="blog-pagination">
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <a href="#" class="page-link">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Enhanced Footer -->
+    <footer>
+        <div class="container">
+            <!-- Logo Container -->
+            <div class="footer-logo-container">
+                <a href="index.html">
+                    <img src="ieee-cs-logos-web/IEEE-CS_LogoTM-white.png" alt="IEEE CS Logo" class="footer-logo">
+                </a>
+            </div>
+            
+            <div class="row">
+                <!-- Menu Section -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#goals">Goals</a></li>
+                        <li><a href="index.html#vision">Vision</a></li>
+                        <li><a href="index.html#achievements">Achievements</a></li>
+                        <li><a href="index.html#team">Team</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#connect">Connect Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <h5 class="footer-heading">Connect With Us</h5>
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; IEEE CS Student Chapter 2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Dark Mode Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                // Change icon to sun
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            // Toggle dark mode on button click
+            darkModeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                // Save preference
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    // Change icon to sun
+                    this.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    // Change icon to moon
+                    this.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Check system preference for dark mode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                if (localStorage.getItem('darkMode') !== 'disabled') {
+                    body.classList.add('dark-mode');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('darkMode', 'enabled');
+                }
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (e.matches && localStorage.getItem('darkMode') !== 'disabled') {
+                    body.classList.add('dark-mode');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('darkMode', 'enabled');
+                } else if (!e.matches && localStorage.getItem('darkMode') !== 'enabled') {
+                    body.classList.remove('dark-mode');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+        });
+        
+        // Initialize GSAP animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero section animation
+            gsap.from('.blog-hero-content', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: 'power3.out'
+            });
+            
+            // Counter animation
+            gsap.from('.counter-value', {
+                textContent: 0,
+                duration: 2,
+                ease: 'power2.out',
+                snap: { textContent: 1 },
+                stagger: 0.2
+            });
+            
+            // Wave animation
+            gsap.to('.wave', {
+                backgroundPosition: '100% 0%',
+                ease: 'none',
+                repeat: -1,
+                duration: 20
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Blog category filtering
+        const blogCategories = document.querySelectorAll('.blog-category-filter');
+        const blogPostItems = document.querySelectorAll('.blog-post-item');
+        const noResults = document.getElementById('noResults');
+        
+        blogCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                // Remove active class from all categories
+                blogCategories.forEach(cat => cat.classList.remove('active'));
+                
+                // Add active class to clicked category
+                this.classList.add('active');
+                
+                const categoryValue = this.getAttribute('data-category');
+                let visibleCount = 0;
+                
+                // Filter blog posts
+                blogPostItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    
+                    if (categoryValue === 'all' || itemCategory === categoryValue) {
+                        item.style.display = 'block';
+                        gsap.fromTo(item, 
+                            { opacity: 0, y: 20 }, 
+                            { opacity: 1, y: 0, duration: 0.5 }
+                        );
+                        visibleCount++;
+                    } else {
+                        gsap.to(item, { 
+                            opacity: 0, 
+                            y: -20, 
+                            duration: 0.3,
+                            onComplete: () => {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+                
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                    gsap.fromTo(noResults, 
+                        { opacity: 0, y: 20 }, 
+                        { opacity: 1, y: 0, duration: 0.5 }
+                    );
+                } else {
+                    gsap.to(noResults, { 
+                        opacity: 0, 
+                        y: -20, 
+                        duration: 0.3,
+                        onComplete: () => {
+                            noResults.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

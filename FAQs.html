@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - IEEE Computer Society Student Chapter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.css">
+    <style>
+        /* CSS Variables for Light Mode - Using colors from Bright Color Palette */
+        :root {
+            --primary-color: #FFA300; /* Bright orange from palette */
+            --primary-light: #FFCC80; /* Lighter version of primary */
+            --primary-dark: #FF8C00; /* Darker version of primary */
+            --secondary-color: #75787B; /* Neutral gray from palette */
+            --accent-color: #00B0F0; /* Bright blue from palette */
+            --accent-light: #90CAF9; /* Lighter version of accent */
+            --accent-dark: #0091EA; /* Darker version of accent */
+            --dark-color: #002855; /* Dark blue from palette */
+            --light-color: #f8f9fa;
+            --text-color: #333333;
+            --text-light: #6c757d;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #dee2e6;
+            --footer-bg: #002855;
+            --footer-text: #ffffff;
+            --gradient-start: #00B0F0;
+            --gradient-end: #002855;
+            --accent-gradient: linear-gradient(135deg, #00B0F0, #002855);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hero-gradient: linear-gradient(135deg, #00B0F0 0%, #002855 100%);
+        }
+        
+        /* Dark Mode Variables with Enhanced Colors - Using colors from Dark Color Palette */
+        body.dark-mode {
+            --primary-color: #FFA300; /* Keep the orange as accent */
+            --primary-light: #FFCC80;
+            --primary-dark: #FF8C00;
+            --secondary-color: #B0BEC5; /* Lighter gray for dark mode */
+            --accent-color: #00B0F0; /* Keep the blue as accent */
+            --accent-light: #90CAF9;
+            --accent-dark: #0091EA;
+            --dark-color: #ECEFF1; /* Light text for dark mode */
+            --light-color: #37474F; /* Darker background for elements */
+            --text-color: #ECEFF1;
+            --text-light: #B0BEC5;
+            --bg-color: #121212; /* Dark background */
+            --card-bg: #1E1E1E; /* Slightly lighter than background */
+            --navbar-bg: rgba(30, 30, 30, 0.95);
+            --border-color: #37474F;
+            --footer-bg: #0D0D0D;
+            --footer-text: #ECEFF1;
+            --gradient-start: #00B0F0;
+            --gradient-end: #37474F;
+            --accent-gradient: linear-gradient(135deg, #00B0F0, #37474F);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --hero-gradient: linear-gradient(135deg, #00B0F0 0%, #37474F 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            transition: background-color 0.4s, color 0.4s;
+        }
+        
+        /* Enhanced Glass Morphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .glass {
+            background: rgba(0, 40, 85, 0.2);
+            border: 1px solid rgba(117, 120, 123, 0.3);
+        }
+        
+        /* Enhanced Navbar */
+        .navbar {
+            background: var(--navbar-bg);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 163, 0, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+            border-radius: 20px;
+        }
+        
+        /* Enhanced Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-mode .dark-mode-toggle {
+            background: var(--primary-color);
+        }
+        
+        /* Social Media Icons in Navbar */
+        .navbar-social {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .navbar-social a {
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Enhanced FAQ Hero Section */
+        .faq-hero {
+            background: var(--hero-gradient);
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/seed/faq-pattern/1920/1080.jpg');
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .faq-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faq-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .faq-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Enhanced Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            display: inline-block;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+        
+        /* Enhanced FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+            position: relative;
+            background-color: var(--bg-color);
+            transition: background-color 0.4s;
+        }
+        
+        /* Enhanced FAQ Stats */
+        .faq-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        /* Enhanced FAQ Categories */
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .faq-category {
+            padding: 10px 20px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-category.active {
+            background: var(--primary-color);
+        }
+        
+        /* Enhanced Search Box */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .search-input:focus {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            outline: none;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+        
+        /* Enhanced FAQ Accordion */
+        .accordion-item {
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            background: var(--card-bg);
+        }
+        
+        .accordion-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .accordion-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 20px;
+            border: none;
+            box-shadow: none !important;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--dark-color);
+            color: var(--card-bg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: transparent;
+        }
+        
+        .accordion-button:not(.collapsed)::before {
+            background: var(--accent-gradient);
+            opacity: 0.2;
+        }
+        
+        .accordion-body {
+            padding: 20px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 0 0 15px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .accordion-button:not(.collapsed) .accordion-button-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-button-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Enhanced Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Enhanced Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 50px 0 20px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s, color 0.4s;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+        }
+        
+        .footer-logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            max-width: 150px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-heading {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .footer-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-menu a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--footer-text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social-link:hover {
+            background: var(--primary-color);
+            color: var(--footer-bg);
+            transform: translateY(-3px);
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Wave Animation */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffa300" fill-opacity="0.2" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .faq-category {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+            }
+            
+            .navbar-social {
+                display: none;
+            }
+            
+            .navbar-nav {
+                text-align: center;
+                margin-top: 10px;
+            }
+            
+            .navbar-nav .nav-item {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Left side: Logo and dark mode toggle -->
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand" href="index.html">
+                    <img src="ieee-cs-logos-web/IEEE-CS_LogoTM-orange.png" alt="IEEE CS Logo" style="max-width: 150px;">
+                </a>
+               
+            </div>
+            
+            <!-- Middle: Navigation links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#goals">Goals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#vision">Vision</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#achievements">Achievements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#connect">Connect Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faqs.html">FAQs</a>
+                    </li>
+                </ul>
+            </div>
+            <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode" style="margin-right: 15px;">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Right side: Social media links -->
+            <div class="navbar-social">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            
+            <!-- Mobile menu toggle button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- FAQ Hero Section with Parallax -->
+    <section class="faq-hero">
+        <div class="faq-hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Frequently Asked Questions</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">Find answers to common questions about our IEEE Computer Society Student Chapter</p>
+        </div>
+        <div class="wave"></div>
+    </section>
+    
+    <!-- FAQ Section with Modern Design -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>FAQs</h2>
+            </div>
+            
+            <!-- FAQ Stats -->
+            <div class="faq-stats">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="counter-value" data-target="15">15</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="counter-value" data-target="5">5</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="counter-value" data-target="100">68</div>
+                    <div class="stat-label">Members Helped</div>
+                </div>
+            </div>
+            
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <div class="faq-category active" data-category="all">All</div>
+                <div class="faq-category" data-category="membership">Membership</div>
+                <div class="faq-category" data-category="events">Events</div>
+                <div class="faq-category" data-category="benefits">Benefits</div>
+                <div class="faq-category" data-category="technical">Technical</div>
+            </div>
+            
+            <!-- Search Box -->
+            <div class="search-container" data-aos="fade-up">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search for questions...">
+            </div>
+            
+            <!-- FAQ Accordion with Modern Design -->
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                            How do I join the IEEE Computer Society Student Chapter?
+                            <i class="fas fa-chevron-down accordion-button-icon ms-auto"></i>
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>To join our chapter, simply fill out the contact form on our Connect Us page or reach out to our membership coordinator at membership@ieeecss.org. There's a nominal membership fee that provides access to all our events, workshops, and resources. New members are welcome throughout the year!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            What events and activities do you organize?
+                            <i class="fas fa-chevron-down accordion-button-icon ms-auto"></i>
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>We organize a variety of events including technical workshops, guest lectures from industry experts, coding competitions, hackathons, networking events, and social gatherings. We also host the annual "Future of AI" conference and provide mentorship programs for students interested in various tech domains.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Do I need to be an IEEE member to join?
+                            <i class="fas fa-chevron-down accordion-button-icon ms-auto"></i>
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>No, you don't need to be an IEEE member to join our Computer Society Student Chapter. However, IEEE members receive additional benefits and discounts on our events. We welcome all students interested in computer science and technology, regardless of their IEEE membership status.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            How can I get involved as a volunteer?
+                            <i class="fas fa-chevron-down accordion-button-icon ms-auto"></i>
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>We're always looking for passionate volunteers! You can volunteer for event organization, content creation, social media management, or technical support. Contact our volunteer coordinator at volunteer@ieeecss.org or attend our monthly volunteer meetings to learn about current opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            What benefits do I get from joining?
+                            <i class="fas fa-chevron-down accordion-button-icon ms-auto"></i>
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Members enjoy access to exclusive workshops, networking opportunities with industry professionals, mentorship programs, internship referrals, certification courses at discounted rates, and the chance to develop leadership skills by participating in our committees. You'll also become part of a global community of computing professionals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Still Have Questions -->
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="600">
+                <div class="glass p-4 mb-4">
+                    <h3>Still have questions?</h3>
+                    <p>Feel free to reach out to us directly for more information.</p>
+                </div>
+                <a href="index.html#connect" class="btn btn-glow">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Enhanced Footer -->
+    <footer>
+        <div class="container">
+            <!-- Logo Container -->
+            <div class="footer-logo-container">
+                <a href="index.html">
+                    <img src="ieee-cs-logos-web/IEEE-CS_LogoTM-white.png" alt="IEEE CS Logo" class="footer-logo">
+                </a>
+            </div>
+            
+            <div class="row">
+                <!-- Menu Section -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#goals">Goals</a></li>
+                        <li><a href="index.html#vision">Vision</a></li>
+                        <li><a href="index.html#achievements">Achievements</a></li>
+                        <li><a href="index.html#team">Team</a></li>
+                        <li><a href="index.html#blog">Blog</a></li>
+                        <li><a href="index.html#connect">Connect Us</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <h5 class="footer-heading">Connect With Us</h5>
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; IEEE CS Student Chapter 2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Dark Mode Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                // Change icon to sun
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            // Toggle dark mode on button click
+            darkModeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                // Save preference
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    // Change icon to sun
+                    this.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    // Change icon to moon
+                    this.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // Check system preference for dark mode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                if (localStorage.getItem('darkMode') !== 'disabled') {
+                    body.classList.add('dark-mode');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('darkMode', 'enabled');
+                }
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (e.matches && localStorage.getItem('darkMode') !== 'disabled') {
+                    body.classList.add('dark-mode');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('darkMode', 'enabled');
+                } else if (!e.matches && localStorage.getItem('darkMode') !== 'enabled') {
+                    body.classList.remove('dark-mode');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+        });
+        
+        // Initialize GSAP animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero section animation
+            gsap.from('.faq-hero-content', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: 'power3.out'
+            });
+            
+            // Counter animation
+            gsap.from('.counter-value', {
+                textContent: 0,
+                duration: 2,
+                ease: 'power2.out',
+                snap: { textContent: 1 },
+                stagger: 0.2
+            });
+            
+            // Wave animation
+            gsap.to('.wave', {
+                backgroundPosition: '100% 0%',
+                ease: 'none',
+                repeat: -1,
+                duration: 20
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // FAQ category filtering
+        const faqCategories = document.querySelectorAll('.faq-category');
+        const faqItems = document.querySelectorAll('.accordion-item');
+        
+        faqCategories.forEach(category => {
+            category.addEventListener('click', function() {
+                // Remove active class from all categories
+                faqCategories.forEach(cat => cat.classList.remove('active'));
+                
+                // Add active class to clicked category
+                this.classList.add('active');
+                
+                const categoryValue = this.getAttribute('data-category');
+                
+                // Filter FAQ items
+                faqItems.forEach(item => {
+                    const faqText = item.textContent.toLowerCase();
+                    
+                    if (categoryValue === 'all' || faqText.includes(categoryValue)) {
+                        item.style.display = 'block';
+                        gsap.fromTo(item, 
+                            { opacity: 0, y: 20 }, 
+                            { opacity: 1, y: 0, duration: 0.5 }
+                        );
+                    } else {
+                        gsap.to(item, { 
+                            opacity: 0, 
+                            y: -20, 
+                            duration: 0.3,
+                            onComplete: () => {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            faqItems.forEach(item => {
+                const faqText = item.textContent.toLowerCase();
+                
+                if (faqText.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    gsap.fromTo(item, 
+                        { opacity: 0, y: 20 }, 
+                        { opacity: 1, y: 0, duration: 0.5 }
+                    );
+                } else {
+                    gsap.to(item, { 
+                        opacity: 0, 
+                        y: -20, 
+                        duration: 0.3,
+                        onComplete: () => {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Accordion animation
+        const accordionButtons = document.querySelectorAll('.accordion-button');
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('.accordion-button-icon');
+                gsap.to(icon, {
+                    rotation: this.classList.contains('collapsed') ? 0 : 180,
+                    duration: 0.3
+                });
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== 'faqs.html') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
